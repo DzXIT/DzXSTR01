@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel - DzXSTR01</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #0066ff;
+            --secondary: #0044cc;
+            --accent: #8a2be2;
+            --accent2: #00d4ff;
+            --neon: #00ffff;
+            --light: #ffffff;
+            --dark: #0a0f2d;
+            --darker: #05081f;
+            --card-bg: rgba(16, 24, 64, 0.8);
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--accent) 50%, var(--accent2) 100%);
+            --shadow: 0 8px 32px rgba(0, 102, 255, 0.25);
+            --shadow-neon: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(180deg, var(--darker) 0%, var(--dark) 100%);
+            color: var(--light);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 10%, rgba(0, 102, 255, 0.1) 0%, transparent 30%),
+                radial-gradient(circle at 90% 20%, rgba(138, 43, 226, 0.08) 0%, transparent 30%),
+                radial-gradient(circle at 40% 80%, rgba(0, 212, 255, 0.05) 0%, transparent 30%);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        .admin-header {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 2px solid var(--primary);
+            box-shadow: var(--shadow);
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+
+        .admin-header h1 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 10px;
+        }
+
+        .admin-header p {
+            color: var(--accent2);
+            opacity: 0.9;
+        }
+
+        /* Navigation */
+        .admin-nav {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 25px;
+            flex-wrap: wrap;
+        }
+
+        .nav-btn {
+            background: var(--card-bg);
+            border: 1px solid var(--primary);
+            color: var(--light);
+            padding: 12px 25px;
+            border-radius: 10px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .nav-btn:hover {
+            background: var(--primary);
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-neon);
+        }
+
+        .nav-btn.active {
+            background: var(--gradient);
+        }
+
+        /* Content Sections */
+        .content-section {
+            display: none;
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 25px;
+            border: 1px solid var(--primary);
+            box-shadow: var(--shadow);
+            backdrop-filter: blur(10px);
+        }
+
+        .content-section.active {
+            display: block;
+            animation: fadeIn 0.3s ease;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Section Titles */
+        .section-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            color: var(--accent2);
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid var(--primary);
+        }
+
+        /* Stock Management */
+        .stocks-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stock-item {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            border: 1px solid rgba(0, 102, 255, 0.3);
+            transition: all 0.3s ease;
+        }
+
+        .stock-item:hover {
+            border-color: var(--accent2);
+            box-shadow: var(--shadow-neon);
+        }
+
+        .stock-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid rgba(0, 102, 255, 0.3);
+        }
+
+        .stock-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.2rem;
+            color: var(--accent2);
+            font-weight: 600;
+        }
+
+        .stock-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        .action-btn {
+            width: 35px;
+            height: 35px;
+            border-radius: 8px;
+            border: none;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.2s ease;
+        }
+
+        .edit-btn {
+            background: var(--primary);
+            color: white;
+        }
+
+        .delete-btn {
+            background: #ff4444;
+            color: white;
+        }
+
+        .action-btn:hover {
+            transform: scale(1.1);
+        }
+
+        .stock-preview {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .stock-preview img {
+            max-width: 100%;
+            max-height: 150px;
+            border-radius: 8px;
+            border: 2px solid var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .stock-info {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        .info-item {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 8px;
+            border-radius: 6px;
+        }
+
+        .info-label {
+            font-size: 0.8rem;
+            color: var(--accent2);
+            margin-bottom: 3px;
+        }
+
+        .info-value {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        /* Forms */
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--accent2);
+            font-weight: 600;
+        }
+
+        .form-input, .form-textarea, .form-select {
+            width: 100%;
+            padding: 12px 15px;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid var(--primary);
+            border-radius: 8px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-input:focus, .form-textarea:focus, .form-select:focus {
+            outline: none;
+            border-color: var(--accent2);
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.2);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 12px 25px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: var(--gradient);
+            color: white;
+        }
+
+        .btn-success {
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+        }
+
+        .btn-danger {
+            background: linear-gradient(135deg, #ff4444, #cc0000);
+            color: white;
+        }
+
+        .btn-warning {
+            background: linear-gradient(135deg, #ffaa00, #ff7700);
+            color: white;
+        }
+
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: var(--shadow-neon);
+        }
+
+        /* Messages */
+        .message {
+            padding: 15px 20px;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .message-success {
+            background: rgba(37, 211, 102, 0.2);
+            border: 1px solid #25D366;
+            color: #25D366;
+        }
+
+        .message-error {
+            background: rgba(255, 68, 68, 0.2);
+            border: 1px solid #ff4444;
+            color: #ff4444;
+        }
+
+        .message-info {
+            background: rgba(0, 102, 255, 0.2);
+            border: 1px solid var(--primary);
+            color: var(--accent2);
+        }
+
+        /* Stats */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .stat-card {
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: center;
+            border: 1px solid var(--primary);
+        }
+
+        .stat-number {
+            font-size: 2.5rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            line-height: 1;
+        }
+
+        .stat-label {
+            color: var(--accent2);
+            margin-top: 10px;
+            font-size: 0.9rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .admin-nav {
+                flex-direction: column;
+            }
+            
+            .nav-btn {
+                width: 100%;
+                justify-content: center;
+            }
+            
+            .stocks-list {
+                grid-template-columns: 1fr;
+            }
+            
+            .form-row {
+                grid-template-columns: 1fr;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (max-width: 480px) {
+            .container {
+                padding: 10px;
+            }
+            
+            .admin-header {
+                padding: 20px 15px;
+            }
+            
+            .content-section {
+                padding: 20px 15px;
+            }
+            
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Header -->
+        <div class="admin-header">
+            <h1><i class="fas fa-crown"></i> ADMIN PANEL DZXSTR01</h1>
+            <p>Kelola semua data akun Free Fire dengan mudah</p>
+        </div>
+
+        <!-- Navigation -->
+        <div class="admin-nav">
+            <button class="nav-btn active" data-section="stocks">
+                <i class="fas fa-boxes"></i> Kelola Stok
+            </button>
+            <button class="nav-btn" data-section="add">
+                <i class="fas fa-plus-circle"></i> Tambah Stok Baru
+            </button>
+            <button class="nav-btn" data-section="edit">
+                <i class="fas fa-edit"></i> Edit Data
+            </button>
+            <button class="nav-btn" data-section="stats">
+                <i class="fas fa-chart-bar"></i> Statistik
+            </button>
+            <a href="index.html" class="nav-btn" style="text-decoration: none;">
+                <i class="fas fa-globe"></i> Lihat Website
+            </a>
+        </div>
+
+        <!-- Messages -->
+        <div id="message" class="message"></div>
+
+        <!-- Stocks Management Section -->
+        <div id="stocks" class="content-section active">
+            <h2 class="section-title"><i class="fas fa-boxes"></i> Semua Stok Akun</h2>
+            <div class="stocks-list" id="stocksList">
+                <!-- Data akan diisi JavaScript -->
+            </div>
+            <div style="text-align: center;">
+                <button class="btn btn-primary" onclick="loadStocks()">
+                    <i class="fas fa-sync"></i> Refresh Data
+                </button>
+            </div>
+        </div>
+
+        <!-- Add Stock Section -->
+        <div id="add" class="content-section">
+            <h2 class="section-title"><i class="fas fa-plus-circle"></i> Tambah Stok Baru</h2>
+            <form id="addForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Judul Stok</label>
+                        <input type="text" class="form-input" id="newTitle" placeholder="STOK 8" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">URL Gambar</label>
+                        <input type="text" class="form-input" id="newImage" placeholder="https://example.com/gambar.jpg" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Spek</label>
+                        <input type="text" class="form-input" id="newSpek" value="CLICK GAMBAR UNTUK MEMPERBESAR" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Login Method</label>
+                        <select class="form-select" id="newLog">
+                            <option value="BINDKOS">BINDKOS</option>
+                            <option value="BIND SPKET">BIND SPKET</option>
+                            <option value="GOOGLE">GOOGLE</option>
+                            <option value="BIND">BIND</option>
+                        </select>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">OP (Harga/Diamond)</label>
+                        <input type="text" class="form-input" id="newOp" placeholder="100+" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Catatan</label>
+                        <input type="text" class="form-input" id="newNote" value="GANJAIN CARI STOK SUSAH🤝" required>
+                    </div>
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label">Preview Gambar</label>
+                    <div id="imagePreview" style="text-align: center; margin: 15px 0;">
+                        <img id="previewImg" src="" alt="Preview" style="max-width: 300px; max-height: 200px; border-radius: 8px; border: 2px solid var(--primary); display: none;">
+                        <p id="previewText" style="color: #aaa;">Gambar akan muncul di sini</p>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 15px; margin-top: 25px;">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-save"></i> Simpan Stok Baru
+                    </button>
+                    <button type="button" class="btn btn-warning" onclick="previewImage()">
+                        <i class="fas fa-eye"></i> Preview Gambar
+                    </button>
+                    <button type="reset" class="btn btn-danger">
+                        <i class="fas fa-times"></i> Reset Form
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Edit Data Section -->
+        <div id="edit" class="content-section">
+            <h2 class="section-title"><i class="fas fa-edit"></i> Edit Data Stok</h2>
+            <div class="form-group">
+                <label class="form-label">Pilih Stok untuk Edit</label>
+                <select class="form-select" id="stockSelector" onchange="loadStockData()">
+                    <option value="">-- Pilih Stok --</option>
+                </select>
+            </div>
+            
+            <form id="editForm" style="display: none;">
+                <input type="hidden" id="editId">
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Judul Stok</label>
+                        <input type="text" class="form-input" id="editTitle" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">URL Gambar</label>
+                        <input type="text" class="form-input" id="editImage" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">Spek</label>
+                        <input type="text" class="form-input" id="editSpek" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Login Method</label>
+                        <input type="text" class="form-input" id="editLog" required>
+                    </div>
+                </div>
+                
+                <div class="form-row">
+                    <div class="form-group">
+                        <label class="form-label">OP (Harga/Diamond)</label>
+                        <input type="text" class="form-input" id="editOp" required>
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Catatan</label>
+                        <input type="text" class="form-input" id="editNote" required>
+                    </div>
+                </div>
+                
+                <div style="display: flex; gap: 15px; margin-top: 25px;">
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-check"></i> Update Stok
+                    </button>
+                    <button type="button" class="btn btn-danger" onclick="deleteCurrentStock()">
+                        <i class="fas fa-trash"></i> Hapus Stok Ini
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Statistics Section -->
+        <div id="stats" class="content-section">
+            <h2 class="section-title"><i class="fas fa-chart-bar"></i> Statistik Data</h2>
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-number" id="totalStocks">0</div>
+                    <div class="stat-label">Total Stok Akun</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="bindkosCount">0</div>
+                    <div class="stat-label">Akun BINDKOS</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="bindSpketCount">0</div>
+                    <div class="stat-label">Akun BIND SPKET</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-number" id="googleCount">0</div>
+                    <div class="stat-label">Akun GOOGLE</div>
+                </div>
+            </div>
+            
+            <div style="margin-top: 30px; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 10px;">
+                <h3 style="color: var(--accent2); margin-bottom: 15px;">Quick Actions</h3>
+                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                    <button class="btn btn-primary" onclick="backupData()">
+                        <i class="fas fa-download"></i> Backup Data
+                    </button>
+                    <button class="btn btn-warning" onclick="restoreData()">
+                        <i class="fas fa-upload"></i> Restore Data
+                    </button>
+                    <button class="btn btn-danger" onclick="resetAllData()">
+                        <i class="fas fa-trash-alt"></i> Reset Semua Data
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // ========================
+        // GLOBAL VARIABLES
+        // ========================
+        let stocksData = [];
+        let nextId = 1;
+
+        // ========================
+        // INITIALIZATION
+        // ========================
+        document.addEventListener('DOMContentLoaded', function() {
+            loadAllData();
+            setupEventListeners();
+            setupNavigation();
+        });
+
+        // ========================
+        // DATA MANAGEMENT
+        // ========================
+        function loadAllData() {
+            const savedData = localStorage.getItem('dzxStocks');
+            stocksData = savedData ? JSON.parse(savedData) : [];
+            nextId = stocksData.length > 0 ? Math.max(...stocksData.map(s => s.id)) + 1 : 1;
+            
+            loadStocks();
+            updateStockSelector();
+            updateStats();
+            showMessage('Data berhasil dimuat!', 'success');
+        }
+
+        function saveAllData() {
+            localStorage.setItem('dzxStocks', JSON.stringify(stocksData));
+            showMessage('Semua data berhasil disimpan!', 'success');
+        }
+
+        // ========================
+        // STOCKS MANAGEMENT
+        // ========================
+        function loadStocks() {
+            const stocksList = document.getElementById('stocksList');
+            stocksList.innerHTML = '';
+            
+            if (stocksData.length === 0) {
+                stocksList.innerHTML = `
+                    <div style="grid-column: 1/-1; text-align: center; padding: 40px; color: #aaa;">
+                        <i class="fas fa-box-open" style="font-size: 3rem; margin-bottom: 15px;"></i>
+                        <h3>Belum ada data stok</h3>
+                        <p>Tambahkan stok baru di bagian "Tambah Stok Baru"</p>
+                    </div>
+                `;
+                return;
+            }
+            
+            stocksData.forEach(stock => {
+                const stockItem = document.createElement('div');
+                stockItem.className = 'stock-item';
+                
+                stockItem.innerHTML = `
+                    <div class="stock-header">
+                        <div class="stock-title">${stock.title}</div>
+                        <div class="stock-actions">
+                            <button class="action-btn edit-btn" onclick="editStock(${stock.id})" title="Edit">
+                                <i class="fas fa-edit"></i>
+                            </button>
+                            <button class="action-btn delete-btn" onclick="deleteStock(${stock.id})" title="Hapus">
+                                <i class="fas fa-trash"></i>
+                            </button>
+                        </div>
+                    </div>
+                    
+                    <div class="stock-preview">
+                        <img src="${stock.image}" alt="${stock.title}" onerror="this.src='https://via.placeholder.com/300x200?text=Gambar+Error'">
+                    </div>
+                    
+                    <div class="stock-info">
+                        <div class="info-item">
+                            <div class="info-label">SPEK</div>
+                            <div class="info-value">${stock.spek}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">LOG</div>
+                            <div class="info-value">${stock.log}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">OP</div>
+                            <div class="info-value">${stock.op}</div>
+                        </div>
+                        <div class="info-item">
+                            <div class="info-label">STATUS</div>
+                            <div class="info-value">READY</div>
+                        </div>
+                    </div>
+                    
+                    <div style="font-size: 0.9rem; color: #ffaa00; text-align: center;">
+                        ${stock.note}
+                    </div>
+                `;
+                
+                stocksList.appendChild(stockItem);
+            });
+        }
+
+        function addStock(newStock) {
+            newStock.id = nextId++;
+            stocksData.push(newStock);
+            saveAllData();
+            loadAllData();
+            showMessage(`Stok ${newStock.title} berhasil ditambahkan!`, 'success');
+        }
+
+        function editStock(id) {
+            const stock = stocksData.find(s => s.id === id);
+            if (!stock) return;
+            
+            document.getElementById('stockSelector').value = id;
+            loadStockData();
+            
+            // Switch to edit section
+            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelector('[data-section="edit"]').classList.add('active');
+            
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+            document.getElementById('edit').classList.add('active');
+        }
+
+        function updateStock(id, updatedData) {
+            const index = stocksData.findIndex(s => s.id === id);
+            if (index !== -1) {
+                stocksData[index] = { ...stocksData[index], ...updatedData };
+                saveAllData();
+                loadAllData();
+                showMessage(`Stok berhasil diperbarui!`, 'success');
+            }
+        }
+
+        function deleteStock(id) {
+            if (!confirm(`Hapus stok ${id}? Data tidak dapat dikembalikan.`)) return;
+            
+            stocksData = stocksData.filter(s => s.id !== id);
+            saveAllData();
+            loadAllData();
+            showMessage(`Stok berhasil dihapus!`, 'success');
+        }
+
+        // ========================
+        // FORM HANDLING
+        // ========================
+        function loadStockData() {
+            const id = parseInt(document.getElementById('stockSelector').value);
+            if (!id) {
+                document.getElementById('editForm').style.display = 'none';
+                return;
+            }
+            
+            const stock = stocksData.find(s => s.id === id);
+            if (!stock) return;
+            
+            document.getElementById('editId').value = stock.id;
+            document.getElementById('editTitle').value = stock.title;
+            document.getElementById('editImage').value = stock.image;
+            document.getElementById('editSpek').value = stock.spek;
+            document.getElementById('editLog').value = stock.log;
+            document.getElementById('editOp').value = stock.op;
+            document.getElementById('editNote').value = stock.note;
+            
+            document.getElementById('editForm').style.display = 'block';
+        }
+
+        function deleteCurrentStock() {
+            const id = parseInt(document.getElementById('editId').value);
+            if (id) deleteStock(id);
+        }
+
+        function previewImage() {
+            const url = document.getElementById('newImage').value || document.getElementById('editImage').value;
+            const previewImg = document.getElementById('previewImg');
+            const previewText = document.getElementById('previewText');
+            
+            if (url && url.trim() !== '') {
+                previewImg.src = url;
+                previewImg.style.display = 'block';
+                previewText.style.display = 'none';
+            } else {
+                previewImg.style.display = 'none';
+                previewText.style.display = 'block';
+                previewText.textContent = 'Masukkan URL gambar terlebih dahulu';
+            }
+        }
+
+        // ========================
+        // STATISTICS
+        // ========================
+        function updateStats() {
+            document.getElementById('totalStocks').textContent = stocksData.length;
+            
+            const bindkosCount = stocksData.filter(s => s.log === 'BINDKOS').length;
+            const bindSpketCount = stocksData.filter(s => s.log === 'BIND SPKET').length;
+            const googleCount = stocksData.filter(s => s.log === 'GOOGLE').length;
+            
+            document.getElementById('bindkosCount').textContent = bindkosCount;
+            document.getElementById('bindSpketCount').textContent = bindSpketCount;
+            document.getElementById('googleCount').textContent = googleCount;
+        }
+
+        function updateStockSelector() {
+            const selector = document.getElementById('stockSelector');
+            selector.innerHTML = '<option value="">-- Pilih Stok --</option>';
+            
+            stocksData.forEach(stock => {
+                const option = document.createElement('option');
+                option.value = stock.id;
+                option.textContent = stock.title;
+                selector.appendChild(option);
+            });
+        }
+
+        // ========================
+        // BACKUP & RESTORE
+        // ========================
+        function backupData() {
+            const dataStr = JSON.stringify(stocksData, null, 2);
+            const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
+            
+            const exportFileDefaultName = `dzxstocks-backup-${new Date().toISOString().split('T')[0]}.json`;
+            
+            const linkElement = document.createElement('a');
+            linkElement.setAttribute('href', dataUri);
+            linkElement.setAttribute('download', exportFileDefaultName);
+            linkElement.click();
+            
+            showMessage('Backup data berhasil didownload!', 'success');
+        }
+
+        function restoreData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            
+            input.onchange = function(event) {
+                const file = event.target.files[0];
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    try {
+                        const data = JSON.parse(e.target.result);
+                        if (confirm(`Restore ${data.length} data stok? Data saat ini akan diganti.`)) {
+                            stocksData = data;
+                            saveAllData();
+                            loadAllData();
+                            showMessage('Data berhasil direstore!', 'success');
+                        }
+                    } catch (error) {
+                        showMessage('Format file tidak valid!', 'error');
+                    }
+                };
+                
+                reader.readAsText(file);
+            };
+            
+            input.click();
+        }
+
+        function resetAllData() {
+            if (!confirm('Reset SEMUA data ke default? Semua perubahan akan hilang!')) return;
+            
+            const defaultData = [
+                {
+                    id: 1,
+                    image: "https://files.catbox.moe/shsrmy.jpg",
+                    title: "STOK 1",
+                    spek: "CLICK GAMBAR UNTUK MEMPERBESAR",
+                    log: "BINDKOS",
+                    op: "100+",
+                    note: "GANJAIN CARI STOK SUSAH🤝"
+                },
+                {
+                    id: 2,
+                    image: "https://files.catbox.moe/sleari.jpg",
+                    title: "STOK 2",
+                    spek: "CLICK GAMBAR UNTUK MEMPERBESAR",
+                    log: "BIND SPKET",
+                    op: "300+",
+                    note: "GANJAIN CARI STOK SUSAH🤝"
+                },
+                {
+                    id: 3,
+                    image: "https://files.catbox.moe/534480.jpg",
+                    title: "STOK 3",
+                    spek: "CLICK GAMBAR UNTUK MEMPERBESAR",
+                    log: "BIND SPKET",
+                    op: "200+",
+                    note: "GANJAIN CARI STOK SUSAH🤝"
+                },
+                {
+                    id: 4,
+                    image: "https://files.catbox.moe/paz7tc.jpg",
+                    title: "STOK 4",
+                    spek: "CLICK GAMBAR UNTUK MEMPERBESAR",
+                    log: "BIND",
+                    op: "160+",
+                    note: "GANJAIN CARI STOK SUSAH🤝"
+                },
+                {
+                    id: 5,
+                    image: "https://files.catbox.moe/kgz1or.jpg",
+                    title: "STOK 5",
+                    spek: "CLICK GAMBAR UNTUK MEMPERBESAR",
+                    log: "BIND SPKET",
+                    op: "180+",
+                    note: "GANJAIN CARI STOK SUSAH🤝"
+                },
+                {
+                    id: 6,
+                    image: "https://files.catbox.moe/xcuzf9.jpg",
+                    title: "STOK 6",
+                    spek: "CLICK GAMBAR UNTUK MEMPERBESAR",
+                    log: "BIND SPKET",
+                    op: "130+",
+                    note: "GANJAIN CARI STOK SUSAH🤝"
+                },
+                {
+                    id: 7,
+                    image: "https://files.catbox.moe/l42g92.jpg",
+                    title: "STOK 7",
+                    spek: "CLICK GAMBAR UNTUK MEMPERBESAR",
+                    log: "GOOGLE",
+                    op: "100+",
+                    note: "GANJAIN CARI STOK SUSAH🤝"
+                }
+            ];
+            
+            stocksData = defaultData;
+            nextId = 8;
+            saveAllData();
+            loadAllData();
+            showMessage('Semua data telah direset ke default!', 'success');
+        }
+
+        // ========================
+        // UI FUNCTIONS
+        // ========================
+        function showMessage(text, type = 'info') {
+            const messageDiv = document.getElementById('message');
+            messageDiv.textContent = text;
+            messageDiv.className = `message message-${type}`;
+            messageDiv.style.display = 'block';
+            
+            setTimeout(() => {
+                messageDiv.style.display = 'none';
+            }, 4000);
+        }
+
+        function setupNavigation() {
+            document.querySelectorAll('.nav-btn').forEach(btn => {
+                if (btn.getAttribute('href')) return;
+                
+                btn.addEventListener('click', function() {
+                    const section = this.getAttribute('data-section');
+                    
+                    // Update active button
+                    document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    // Show corresponding section
+                    document.querySelectorAll('.content-section').forEach(s => {
+                        s.classList.remove('active');
+                    });
+                    document.getElementById(section).classList.add('active');
+                });
+            });
+        }
+
+        function setupEventListeners() {
+            // Add form submit
+            document.getElementById('addForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const newStock = {
+                    title: document.getElementById('newTitle').value,
+                    image: document.getElementById('newImage').value,
+                    spek: document.getElementById('newSpek').value,
+                    log: document.getElementById('newLog').value,
+                    op: document.getElementById('newOp').value,
+                    note: document.getElementById('newNote').value
+                };
+                
+                addStock(newStock);
+                this.reset();
+            });
+            
+            // Edit form submit
+            document.getElementById('editForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const id = parseInt(document.getElementById('editId').value);
+                const updatedData = {
+                    title: document.getElementById('editTitle').value,
+                    image: document.getElementById('editImage').value,
+                    spek: document.getElementById('editSpek').value,
+                    log: document.getElementById('editLog').value,
+                    op: document.getElementById('editOp').value,
+                    note: document.getElementById('editNote').value
+                };
+                
+                updateStock(id, updatedData);
+            });
+            
+            // Auto preview image
+            document.getElementById('newImage').addEventListener('input', previewImage);
+            document.getElementById('editImage').addEventListener('input', previewImage);
+        }
+
+        // Auto-save every 30 seconds
+        setInterval(saveAllData, 30000);
+    </script>
+</body>
+</html>
