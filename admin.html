@@ -7,6 +7,179 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
     <style>
+        /* LOGIN OVERLAY STYLE */
+        #loginOverlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(180deg, #05081f 0%, #0a0f2d 100%);
+            backdrop-filter: blur(20px);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .login-box {
+            background: rgba(16, 24, 64, 0.95);
+            border-radius: 20px;
+            padding: 40px;
+            width: 100%;
+            max-width: 450px;
+            border: 2px solid #0066ff;
+            box-shadow: 0 8px 32px rgba(0, 102, 255, 0.25), 0 0 40px rgba(0, 212, 255, 0.3);
+            position: relative;
+            animation: loginFadeIn 0.5s ease;
+        }
+
+        @keyframes loginFadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .login-box::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: linear-gradient(135deg, #0066ff 0%, #8a2be2 50%, #00d4ff 100%);
+        }
+
+        .login-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .login-icon {
+            width: 70px;
+            height: 70px;
+            margin: 0 auto 15px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #0066ff 0%, #8a2be2 50%, #00d4ff 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+
+        .login-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.8rem;
+            background: linear-gradient(to right, #0066ff, #00d4ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .login-subtitle {
+            color: #00d4ff;
+            opacity: 0.9;
+            font-size: 0.9rem;
+        }
+
+        .login-input-group {
+            margin-bottom: 20px;
+        }
+
+        .login-label {
+            display: block;
+            margin-bottom: 8px;
+            color: #00d4ff;
+            font-weight: 600;
+        }
+
+        .login-input {
+            width: 100%;
+            padding: 14px 45px 14px 15px;
+            background: rgba(0, 0, 0, 0.4);
+            border: 1.5px solid rgba(0, 102, 255, 0.4);
+            border-radius: 10px;
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .login-input:focus {
+            outline: none;
+            border-color: #00d4ff;
+            box-shadow: 0 0 0 3px rgba(0, 212, 255, 0.2);
+        }
+
+        .login-btn {
+            width: 100%;
+            background: linear-gradient(135deg, #0066ff 0%, #8a2be2 50%, #00d4ff 100%);
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 10px;
+            font-size: 1rem;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin-top: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .login-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 0 20px rgba(0, 212, 255, 0.5);
+        }
+
+        .login-message {
+            padding: 12px 15px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            text-align: center;
+            font-weight: 500;
+            display: none;
+        }
+
+        .login-error {
+            background: rgba(255, 68, 68, 0.15);
+            border: 1px solid #ff4444;
+            color: #ff8888;
+        }
+
+        .login-attempts {
+            color: #ffaa00;
+            font-size: 0.85rem;
+            text-align: center;
+            margin-top: 8px;
+            display: none;
+        }
+
+        .login-back {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .back-link {
+            color: #00d4ff;
+            text-decoration: none;
+            font-size: 0.9rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .back-link:hover {
+            color: white;
+        }
+
+        /* ADMIN MAIN STYLE (SAMA PERSIS SEBELUMNYA) */
         :root {
             --primary: #0066ff;
             --secondary: #0044cc;
@@ -34,6 +207,7 @@
             color: var(--light);
             min-height: 100vh;
             padding: 20px;
+            overflow-x: hidden;
         }
 
         body::before {
@@ -53,6 +227,61 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
+        }
+
+        /* SESSION BAR */
+        .session-bar {
+            background: linear-gradient(90deg, #0066ff, #8a2be2);
+            color: white;
+            padding: 10px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.9rem;
+            border-radius: 10px;
+            margin-bottom: 20px;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .session-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .session-user {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+        }
+
+        .session-timer {
+            background: rgba(0, 0, 0, 0.3);
+            padding: 5px 10px;
+            border-radius: 5px;
+            border: 1px solid rgba(0, 212, 255, 0.3);
+            font-family: 'JetBrains Mono', monospace;
+        }
+
+        .logout-btn {
+            background: rgba(255, 68, 68, 0.2);
+            border: 1px solid #ff4444;
+            color: white;
+            padding: 6px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 0.8rem;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .logout-btn:hover {
+            background: rgba(255, 68, 68, 0.4);
+            transform: translateY(-2px);
         }
 
         /* Header */
@@ -410,6 +639,16 @@
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+            
+            .session-bar {
+                flex-direction: column;
+                gap: 10px;
+                text-align: center;
+            }
+            
+            .login-box {
+                padding: 30px 20px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -432,203 +671,267 @@
     </style>
 </head>
 <body>
-    <div class="container">
-        <!-- Header -->
-        <div class="admin-header">
-            <h1><i class="fas fa-crown"></i> ADMIN PANEL DZXSTR01</h1>
-            <p>Kelola semua data akun Free Fire dengan mudah</p>
-        </div>
-
-        <!-- Navigation -->
-        <div class="admin-nav">
-            <button class="nav-btn active" data-section="stocks">
-                <i class="fas fa-boxes"></i> Kelola Stok
-            </button>
-            <button class="nav-btn" data-section="add">
-                <i class="fas fa-plus-circle"></i> Tambah Stok Baru
-            </button>
-            <button class="nav-btn" data-section="edit">
-                <i class="fas fa-edit"></i> Edit Data
-            </button>
-            <button class="nav-btn" data-section="stats">
-                <i class="fas fa-chart-bar"></i> Statistik
-            </button>
-            <a href="index.html" class="nav-btn" style="text-decoration: none;">
-                <i class="fas fa-globe"></i> Lihat Website
-            </a>
-        </div>
-
-        <!-- Messages -->
-        <div id="message" class="message"></div>
-
-        <!-- Stocks Management Section -->
-        <div id="stocks" class="content-section active">
-            <h2 class="section-title"><i class="fas fa-boxes"></i> Semua Stok Akun</h2>
-            <div class="stocks-list" id="stocksList">
-                <!-- Data akan diisi JavaScript -->
+    <!-- Login Overlay -->
+    <div id="loginOverlay">
+        <div class="login-box">
+            <div class="login-header">
+                <div class="login-icon">
+                    <i class="fas fa-shield-alt"></i>
+                </div>
+                <h1 class="login-title">ADMIN ACCESS</h1>
+                <p class="login-subtitle">DzXSTR01 - Restricted Area</p>
             </div>
-            <div style="text-align: center;">
-                <button class="btn btn-primary" onclick="loadStocks()">
-                    <i class="fas fa-sync"></i> Refresh Data
+            
+            <div id="loginMessage" class="login-message"></div>
+            
+            <form id="loginForm">
+                <div class="login-input-group">
+                    <label class="login-label">Username</label>
+                    <input type="text" class="login-input" id="username" placeholder="Enter username" required>
+                </div>
+                
+                <div class="login-input-group">
+                    <label class="login-label">Password</label>
+                    <input type="password" class="login-input" id="password" placeholder="Enter password" required>
+                </div>
+                
+                <div id="attemptsWarning" class="login-attempts">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <span id="attemptsCount">3</span> attempts remaining
+                </div>
+                
+                <button type="submit" class="login-btn">
+                    <i class="fas fa-sign-in-alt"></i>
+                    Login to Admin Panel
                 </button>
+            </form>
+            
+            <div class="login-back">
+                <a href="index.html" class="back-link">
+                    <i class="fas fa-arrow-left"></i>
+                    Back to Main Website
+                </a>
             </div>
         </div>
+    </div>
 
-        <!-- Add Stock Section -->
-        <div id="add" class="content-section">
-            <h2 class="section-title"><i class="fas fa-plus-circle"></i> Tambah Stok Baru</h2>
-            <form id="addForm">
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label">Judul Stok</label>
-                        <input type="text" class="form-input" id="newTitle" placeholder="STOK 8" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">URL Gambar</label>
-                        <input type="text" class="form-input" id="newImage" placeholder="https://example.com/gambar.jpg" required>
-                    </div>
+    <!-- Admin Content (Hidden until login) -->
+    <div id="adminContent" style="display: none;">
+        <!-- Session Bar -->
+        <div class="session-bar">
+            <div class="session-info">
+                <div class="session-user">
+                    <i class="fas fa-user-shield"></i>
+                    Logged in as: <strong id="currentUser">DzXNewEra99</strong>
                 </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label">Spek</label>
-                        <input type="text" class="form-input" id="newSpek" value="CLICK GAMBAR UNTUK MEMPERBESAR" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Login Method</label>
-                        <select class="form-select" id="newLog">
-                            <option value="BINDKOS">BINDKOS</option>
-                            <option value="BIND SPKET">BIND SPKET</option>
-                            <option value="GOOGLE">GOOGLE</option>
-                            <option value="BIND">BIND</option>
-                        </select>
-                    </div>
+                <div class="session-timer">
+                    <i class="fas fa-clock"></i>
+                    Session: <span id="sessionTimer">120:00</span>
                 </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label">OP (Harga/Diamond)</label>
-                        <input type="text" class="form-input" id="newOp" placeholder="100+" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Catatan</label>
-                        <input type="text" class="form-input" id="newNote" value="GANJAIN CARI STOK SUSAH🤝" required>
-                    </div>
+            </div>
+            <button class="logout-btn" onclick="logoutAdmin()">
+                <i class="fas fa-sign-out-alt"></i> Logout
+            </button>
+        </div>
+
+        <div class="container">
+            <!-- Header -->
+            <div class="admin-header">
+                <h1><i class="fas fa-crown"></i> ADMIN PANEL DZXSTR01</h1>
+                <p>Kelola semua data akun Free Fire dengan mudah</p>
+            </div>
+
+            <!-- Navigation -->
+            <div class="admin-nav">
+                <button class="nav-btn active" data-section="stocks">
+                    <i class="fas fa-boxes"></i> Kelola Stok
+                </button>
+                <button class="nav-btn" data-section="add">
+                    <i class="fas fa-plus-circle"></i> Tambah Stok Baru
+                </button>
+                <button class="nav-btn" data-section="edit">
+                    <i class="fas fa-edit"></i> Edit Data
+                </button>
+                <button class="nav-btn" data-section="stats">
+                    <i class="fas fa-chart-bar"></i> Statistik
+                </button>
+                <a href="index.html" class="nav-btn" style="text-decoration: none;">
+                    <i class="fas fa-globe"></i> Lihat Website
+                </a>
+            </div>
+
+            <!-- Messages -->
+            <div id="message" class="message"></div>
+
+            <!-- Stocks Management Section -->
+            <div id="stocks" class="content-section active">
+                <h2 class="section-title"><i class="fas fa-boxes"></i> Semua Stok Akun</h2>
+                <div class="stocks-list" id="stocksList">
+                    <!-- Data akan diisi JavaScript -->
                 </div>
-                
+                <div style="text-align: center;">
+                    <button class="btn btn-primary" onclick="loadStocks()">
+                        <i class="fas fa-sync"></i> Refresh Data
+                    </button>
+                </div>
+            </div>
+
+            <!-- Add Stock Section -->
+            <div id="add" class="content-section">
+                <h2 class="section-title"><i class="fas fa-plus-circle"></i> Tambah Stok Baru</h2>
+                <form id="addForm">
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Judul Stok</label>
+                            <input type="text" class="form-input" id="newTitle" placeholder="STOK 8" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">URL Gambar</label>
+                            <input type="text" class="form-input" id="newImage" placeholder="https://example.com/gambar.jpg" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Spek</label>
+                            <input type="text" class="form-input" id="newSpek" value="CLICK GAMBAR UNTUK MEMPERBESAR" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Login Method</label>
+                            <select class="form-select" id="newLog">
+                                <option value="BINDKOS">BINDKOS</option>
+                                <option value="BIND SPKET">BIND SPKET</option>
+                                <option value="GOOGLE">GOOGLE</option>
+                                <option value="BIND">BIND</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">OP (Harga/Diamond)</label>
+                            <input type="text" class="form-input" id="newOp" placeholder="100+" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Catatan</label>
+                            <input type="text" class="form-input" id="newNote" value="GANJAIN CARI STOK SUSAH🤝" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="form-label">Preview Gambar</label>
+                        <div id="imagePreview" style="text-align: center; margin: 15px 0;">
+                            <img id="previewImg" src="" alt="Preview" style="max-width: 300px; max-height: 200px; border-radius: 8px; border: 2px solid var(--primary); display: none;">
+                            <p id="previewText" style="color: #aaa;">Gambar akan muncul di sini</p>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 15px; margin-top: 25px;">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-save"></i> Simpan Stok Baru
+                        </button>
+                        <button type="button" class="btn btn-warning" onclick="previewImage()">
+                            <i class="fas fa-eye"></i> Preview Gambar
+                        </button>
+                        <button type="reset" class="btn btn-danger">
+                            <i class="fas fa-times"></i> Reset Form
+                        </button>
+                    </div>
+                </form>
+            </div>
+
+            <!-- Edit Data Section -->
+            <div id="edit" class="content-section">
+                <h2 class="section-title"><i class="fas fa-edit"></i> Edit Data Stok</h2>
                 <div class="form-group">
-                    <label class="form-label">Preview Gambar</label>
-                    <div id="imagePreview" style="text-align: center; margin: 15px 0;">
-                        <img id="previewImg" src="" alt="Preview" style="max-width: 300px; max-height: 200px; border-radius: 8px; border: 2px solid var(--primary); display: none;">
-                        <p id="previewText" style="color: #aaa;">Gambar akan muncul di sini</p>
-                    </div>
+                    <label class="form-label">Pilih Stok untuk Edit</label>
+                    <select class="form-select" id="stockSelector" onchange="loadStockData()">
+                        <option value="">-- Pilih Stok --</option>
+                    </select>
                 </div>
                 
-                <div style="display: flex; gap: 15px; margin-top: 25px;">
-                    <button type="submit" class="btn btn-success">
-                        <i class="fas fa-save"></i> Simpan Stok Baru
-                    </button>
-                    <button type="button" class="btn btn-warning" onclick="previewImage()">
-                        <i class="fas fa-eye"></i> Preview Gambar
-                    </button>
-                    <button type="reset" class="btn btn-danger">
-                        <i class="fas fa-times"></i> Reset Form
-                    </button>
-                </div>
-            </form>
-        </div>
-
-        <!-- Edit Data Section -->
-        <div id="edit" class="content-section">
-            <h2 class="section-title"><i class="fas fa-edit"></i> Edit Data Stok</h2>
-            <div class="form-group">
-                <label class="form-label">Pilih Stok untuk Edit</label>
-                <select class="form-select" id="stockSelector" onchange="loadStockData()">
-                    <option value="">-- Pilih Stok --</option>
-                </select>
+                <form id="editForm" style="display: none;">
+                    <input type="hidden" id="editId">
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Judul Stok</label>
+                            <input type="text" class="form-input" id="editTitle" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">URL Gambar</label>
+                            <input type="text" class="form-input" id="editImage" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">Spek</label>
+                            <input type="text" class="form-input" id="editSpek" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Login Method</label>
+                            <input type="text" class="form-input" id="editLog" required>
+                        </div>
+                    </div>
+                    
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label">OP (Harga/Diamond)</label>
+                            <input type="text" class="form-input" id="editOp" required>
+                        </div>
+                        <div class="form-group">
+                            <label class="form-label">Catatan</label>
+                            <input type="text" class="form-input" id="editNote" required>
+                        </div>
+                    </div>
+                    
+                    <div style="display: flex; gap: 15px; margin-top: 25px;">
+                        <button type="submit" class="btn btn-success">
+                            <i class="fas fa-check"></i> Update Stok
+                        </button>
+                        <button type="button" class="btn btn-danger" onclick="deleteCurrentStock()">
+                            <i class="fas fa-trash"></i> Hapus Stok Ini
+                        </button>
+                    </div>
+                </form>
             </div>
-            
-            <form id="editForm" style="display: none;">
-                <input type="hidden" id="editId">
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label">Judul Stok</label>
-                        <input type="text" class="form-input" id="editTitle" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">URL Gambar</label>
-                        <input type="text" class="form-input" id="editImage" required>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label">Spek</label>
-                        <input type="text" class="form-input" id="editSpek" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Login Method</label>
-                        <input type="text" class="form-input" id="editLog" required>
-                    </div>
-                </div>
-                
-                <div class="form-row">
-                    <div class="form-group">
-                        <label class="form-label">OP (Harga/Diamond)</label>
-                        <input type="text" class="form-input" id="editOp" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Catatan</label>
-                        <input type="text" class="form-input" id="editNote" required>
-                    </div>
-                </div>
-                
-                <div style="display: flex; gap: 15px; margin-top: 25px;">
-                    <button type="submit" class="btn btn-success">
-                        <i class="fas fa-check"></i> Update Stok
-                    </button>
-                    <button type="button" class="btn btn-danger" onclick="deleteCurrentStock()">
-                        <i class="fas fa-trash"></i> Hapus Stok Ini
-                    </button>
-                </div>
-            </form>
-        </div>
 
-        <!-- Statistics Section -->
-        <div id="stats" class="content-section">
-            <h2 class="section-title"><i class="fas fa-chart-bar"></i> Statistik Data</h2>
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-number" id="totalStocks">0</div>
-                    <div class="stat-label">Total Stok Akun</div>
+            <!-- Statistics Section -->
+            <div id="stats" class="content-section">
+                <h2 class="section-title"><i class="fas fa-chart-bar"></i> Statistik Data</h2>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-number" id="totalStocks">0</div>
+                        <div class="stat-label">Total Stok Akun</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="bindkosCount">0</div>
+                        <div class="stat-label">Akun BINDKOS</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="bindSpketCount">0</div>
+                        <div class="stat-label">Akun BIND SPKET</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" id="googleCount">0</div>
+                        <div class="stat-label">Akun GOOGLE</div>
+                    </div>
                 </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="bindkosCount">0</div>
-                    <div class="stat-label">Akun BINDKOS</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="bindSpketCount">0</div>
-                    <div class="stat-label">Akun BIND SPKET</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-number" id="googleCount">0</div>
-                    <div class="stat-label">Akun GOOGLE</div>
-                </div>
-            </div>
-            
-            <div style="margin-top: 30px; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 10px;">
-                <h3 style="color: var(--accent2); margin-bottom: 15px;">Quick Actions</h3>
-                <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                    <button class="btn btn-primary" onclick="backupData()">
-                        <i class="fas fa-download"></i> Backup Data
-                    </button>
-                    <button class="btn btn-warning" onclick="restoreData()">
-                        <i class="fas fa-upload"></i> Restore Data
-                    </button>
-                    <button class="btn btn-danger" onclick="resetAllData()">
-                        <i class="fas fa-trash-alt"></i> Reset Semua Data
-                    </button>
+                
+                <div style="margin-top: 30px; padding: 20px; background: rgba(0,0,0,0.3); border-radius: 10px;">
+                    <h3 style="color: var(--accent2); margin-bottom: 15px;">Quick Actions</h3>
+                    <div style="display: flex; gap: 15px; flex-wrap: wrap;">
+                        <button class="btn btn-primary" onclick="backupData()">
+                            <i class="fas fa-download"></i> Backup Data
+                        </button>
+                        <button class="btn btn-warning" onclick="restoreData()">
+                            <i class="fas fa-upload"></i> Restore Data
+                        </button>
+                        <button class="btn btn-danger" onclick="resetAllData()">
+                            <i class="fas fa-trash-alt"></i> Reset Semua Data
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -636,22 +939,269 @@
 
     <script>
         // ========================
-        // GLOBAL VARIABLES
+        // SECURITY CONFIGURATION
         // ========================
+        const ADMIN_CREDENTIALS = {
+            username: "DzXNewEra99",
+            password: "DzXNewEra99"
+        };
+
+        const MAX_ATTEMPTS = 5;
+        const SESSION_TIMEOUT = 120; // 2 jam dalam menit
+        const ENCRYPTION_KEY = "DzXSTR01_S3cUr3_K3y_2024";
+
+        // ========================
+        // STATE MANAGEMENT
+        // ========================
+        let loginAttempts = 0;
+        let sessionTimer = null;
+        let sessionTimeLeft = SESSION_TIMEOUT * 60; // dalam detik
         let stocksData = [];
         let nextId = 1;
+
+        // ========================
+        // ENCRYPTION FUNCTIONS
+        // ========================
+        function encryptData(data) {
+            let result = '';
+            for (let i = 0; i < data.length; i++) {
+                result += String.fromCharCode(data.charCodeAt(i) ^ ENCRYPTION_KEY.charCodeAt(i % ENCRYPTION_KEY.length));
+            }
+            return btoa(result);
+        }
+
+        function decryptData(encrypted) {
+            try {
+                const data = atob(encrypted);
+                let result = '';
+                for (let i = 0; i < data.length; i++) {
+                    result += String.fromCharCode(data.charCodeAt(i) ^ ENCRYPTION_KEY.charCodeAt(i % ENCRYPTION_KEY.length));
+                }
+                return result;
+            } catch {
+                return null;
+            }
+        }
+
+        // ========================
+        // SESSION MANAGEMENT
+        // ========================
+        function checkExistingSession() {
+            const session = localStorage.getItem('adminSession');
+            if (session) {
+                try {
+                    const sessionData = JSON.parse(decryptData(session));
+                    if (sessionData && sessionData.username === ADMIN_CREDENTIALS.username) {
+                        const now = Date.now();
+                        if (now < sessionData.expiry) {
+                            // Session valid
+                            startAdminSession();
+                            return true;
+                        } else {
+                            // Session expired
+                            localStorage.removeItem('adminSession');
+                        }
+                    }
+                } catch {
+                    localStorage.removeItem('adminSession');
+                }
+            }
+            return false;
+        }
+
+        function createSession() {
+            const sessionData = {
+                username: ADMIN_CREDENTIALS.username,
+                expiry: Date.now() + (SESSION_TIMEOUT * 60 * 1000),
+                timestamp: Date.now()
+            };
+            localStorage.setItem('adminSession', encryptData(JSON.stringify(sessionData)));
+            localStorage.setItem('loginAttempts', '0');
+            loginAttempts = 0;
+            startAdminSession();
+        }
+
+        function startAdminSession() {
+            document.getElementById('loginOverlay').style.display = 'none';
+            document.getElementById('adminContent').style.display = 'block';
+            updateSessionTimer();
+            startSessionTimer();
+            loadAllData();
+        }
+
+        function logoutAdmin() {
+            if (confirm('Yakin ingin logout?')) {
+                clearInterval(sessionTimer);
+                localStorage.removeItem('adminSession');
+                document.getElementById('adminContent').style.display = 'none';
+                document.getElementById('loginOverlay').style.display = 'flex';
+                resetLoginForm();
+            }
+        }
+
+        // ========================
+        // SESSION TIMER
+        // ========================
+        function startSessionTimer() {
+            clearInterval(sessionTimer);
+            sessionTimeLeft = SESSION_TIMEOUT * 60;
+            
+            sessionTimer = setInterval(() => {
+                sessionTimeLeft--;
+                updateSessionTimer();
+                
+                if (sessionTimeLeft <= 0) {
+                    clearInterval(sessionTimer);
+                    alert('Session expired!');
+                    logoutAdmin();
+                }
+                
+                // Auto-save setiap 30 detik
+                if (sessionTimeLeft % 30 === 0) {
+                    saveAllData();
+                }
+            }, 1000);
+        }
+
+        function updateSessionTimer() {
+            const minutes = Math.floor(sessionTimeLeft / 60);
+            const seconds = sessionTimeLeft % 60;
+            document.getElementById('sessionTimer').textContent = 
+                `${minutes.toString().padStart(2, '0')}:${seconds.toString().padStart(2, '0')}`;
+            
+            if (minutes < 5) {
+                document.getElementById('sessionTimer').style.color = '#ff4444';
+            }
+        }
+
+        // ========================
+        // LOGIN FUNCTIONS
+        // ========================
+        function resetLoginForm() {
+            document.getElementById('username').value = '';
+            document.getElementById('password').value = '';
+            document.getElementById('loginMessage').style.display = 'none';
+            document.getElementById('attemptsWarning').style.display = 'none';
+        }
+
+        function showLoginMessage(text, type) {
+            const msg = document.getElementById('loginMessage');
+            msg.textContent = text;
+            msg.className = `login-message ${type}`;
+            msg.style.display = 'block';
+            
+            setTimeout(() => {
+                msg.style.display = 'none';
+            }, 5000);
+        }
+
+        function handleLoginAttempt() {
+            loginAttempts++;
+            localStorage.setItem('loginAttempts', loginAttempts.toString());
+            
+            const remaining = MAX_ATTEMPTS - loginAttempts;
+            if (remaining > 0) {
+                document.getElementById('attemptsCount').textContent = remaining;
+                document.getElementById('attemptsWarning').style.display = 'block';
+                showLoginMessage(`Wrong credentials! ${remaining} attempts remaining`, 'login-error');
+            }
+            
+            if (loginAttempts >= MAX_ATTEMPTS) {
+                document.getElementById('username').disabled = true;
+                document.getElementById('password').disabled = true;
+                document.querySelector('.login-btn').disabled = true;
+                showLoginMessage('Account locked! Too many failed attempts.', 'login-error');
+                
+                // Auto unlock after 15 minutes
+                setTimeout(() => {
+                    loginAttempts = 0;
+                    localStorage.setItem('loginAttempts', '0');
+                    document.getElementById('username').disabled = false;
+                    document.getElementById('password').disabled = false;
+                    document.querySelector('.login-btn').disabled = false;
+                    document.getElementById('attemptsWarning').style.display = 'none';
+                    showLoginMessage('Account unlocked. Try again.', 'login-error');
+                }, 15 * 60 * 1000);
+            }
+        }
 
         // ========================
         // INITIALIZATION
         // ========================
         document.addEventListener('DOMContentLoaded', function() {
-            loadAllData();
-            setupEventListeners();
-            setupNavigation();
+            // Check for existing session
+            if (checkExistingSession()) {
+                return;
+            }
+            
+            // Load login attempts
+            loginAttempts = parseInt(localStorage.getItem('loginAttempts')) || 0;
+            if (loginAttempts > 0) {
+                const remaining = MAX_ATTEMPTS - loginAttempts;
+                if (remaining > 0) {
+                    document.getElementById('attemptsCount').textContent = remaining;
+                    document.getElementById('attemptsWarning').style.display = 'block';
+                }
+            }
+            
+            // Setup login form
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('username').value.trim();
+                const password = document.getElementById('password').value.trim();
+                
+                if (username === ADMIN_CREDENTIALS.username && password === ADMIN_CREDENTIALS.password) {
+                    // Successful login
+                    createSession();
+                    showLoginMessage('Login successful! Redirecting...', '');
+                } else {
+                    // Failed login
+                    handleLoginAttempt();
+                    document.getElementById('password').value = '';
+                }
+            });
+            
+            // Prevent right-click
+            document.addEventListener('contextmenu', function(e) {
+                e.preventDefault();
+            });
+            
+            // Prevent F12, Ctrl+Shift+I, Ctrl+U
+            document.addEventListener('keydown', function(e) {
+                if (e.key === 'F12' || 
+                    (e.ctrlKey && e.shiftKey && (e.key === 'I' || e.key === 'J')) || 
+                    (e.ctrlKey && e.key === 'U')) {
+                    e.preventDefault();
+                    return false;
+                }
+            });
         });
 
         // ========================
-        // DATA MANAGEMENT
+        // INACTIVITY DETECTION
+        // ========================
+        let inactivityTimer;
+        
+        function resetInactivityTimer() {
+            clearTimeout(inactivityTimer);
+            inactivityTimer = setTimeout(() => {
+                if (document.getElementById('adminContent').style.display !== 'none') {
+                    alert('Session timeout due to inactivity');
+                    logoutAdmin();
+                }
+            }, 10 * 60 * 1000); // 10 minutes
+        }
+        
+        // Reset timer on user activity
+        ['mousemove', 'keypress', 'click', 'scroll'].forEach(event => {
+            document.addEventListener(event, resetInactivityTimer);
+        });
+        
+        resetInactivityTimer();
+
+        // ========================
+        // DATA MANAGEMENT FUNCTIONS (SAMA DENGAN SEBELUMNYA)
         // ========================
         function loadAllData() {
             const savedData = localStorage.getItem('dzxStocks');
@@ -662,6 +1212,10 @@
             updateStockSelector();
             updateStats();
             showMessage('Data berhasil dimuat!', 'success');
+            
+            // Setup navigation
+            setupNavigation();
+            setupEventListeners();
         }
 
         function saveAllData() {
@@ -669,9 +1223,6 @@
             showMessage('Semua data berhasil disimpan!', 'success');
         }
 
-        // ========================
-        // STOCKS MANAGEMENT
-        // ========================
         function loadStocks() {
             const stocksList = document.getElementById('stocksList');
             stocksList.innerHTML = '';
@@ -751,7 +1302,6 @@
             document.getElementById('stockSelector').value = id;
             loadStockData();
             
-            // Switch to edit section
             document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
             document.querySelector('[data-section="edit"]').classList.add('active');
             
@@ -780,9 +1330,6 @@
             showMessage(`Stok berhasil dihapus!`, 'success');
         }
 
-        // ========================
-        // FORM HANDLING
-        // ========================
         function loadStockData() {
             const id = parseInt(document.getElementById('stockSelector').value);
             if (!id) {
@@ -825,9 +1372,6 @@
             }
         }
 
-        // ========================
-        // STATISTICS
-        // ========================
         function updateStats() {
             document.getElementById('totalStocks').textContent = stocksData.length;
             
@@ -852,9 +1396,6 @@
             });
         }
 
-        // ========================
-        // BACKUP & RESTORE
-        // ========================
         function backupData() {
             const dataStr = JSON.stringify(stocksData, null, 2);
             const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
@@ -974,9 +1515,6 @@
             showMessage('Semua data telah direset ke default!', 'success');
         }
 
-        // ========================
-        // UI FUNCTIONS
-        // ========================
         function showMessage(text, type = 'info') {
             const messageDiv = document.getElementById('message');
             messageDiv.textContent = text;
@@ -995,11 +1533,9 @@
                 btn.addEventListener('click', function() {
                     const section = this.getAttribute('data-section');
                     
-                    // Update active button
                     document.querySelectorAll('.nav-btn').forEach(b => b.classList.remove('active'));
                     this.classList.add('active');
                     
-                    // Show corresponding section
                     document.querySelectorAll('.content-section').forEach(s => {
                         s.classList.remove('active');
                     });
@@ -1009,7 +1545,6 @@
         }
 
         function setupEventListeners() {
-            // Add form submit
             document.getElementById('addForm').addEventListener('submit', function(e) {
                 e.preventDefault();
                 
@@ -1026,7 +1561,6 @@
                 this.reset();
             });
             
-            // Edit form submit
             document.getElementById('editForm').addEventListener('submit', function(e) {
                 e.preventDefault();
                 
@@ -1043,13 +1577,16 @@
                 updateStock(id, updatedData);
             });
             
-            // Auto preview image
             document.getElementById('newImage').addEventListener('input', previewImage);
             document.getElementById('editImage').addEventListener('input', previewImage);
         }
 
         // Auto-save every 30 seconds
-        setInterval(saveAllData, 30000);
+        setInterval(() => {
+            if (document.getElementById('adminContent').style.display !== 'none') {
+                saveAllData();
+            }
+        }, 30000);
     </script>
 </body>
 </html>
