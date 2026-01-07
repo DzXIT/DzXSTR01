@@ -1,0 +1,984 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DzXSTR01 | Toko Akun Free Fire Premium</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <style>
+        :root {
+            --primary: #0066ff;
+            --secondary: #0044cc;
+            --accent: #8a2be2;
+            --accent2: #00d4ff;
+            --neon: #00ffff;
+            --light: #ffffff;
+            --dark: #0a0f2d;
+            --darker: #05081f;
+            --card-bg: rgba(16, 24, 64, 0.6);
+            --gradient: linear-gradient(135deg, var(--primary) 0%, var(--accent) 50%, var(--accent2) 100%);
+            --gradient-reverse: linear-gradient(135deg, var(--accent2) 0%, var(--accent) 50%, var(--primary) 100%);
+            --shadow: 0 8px 32px rgba(0, 102, 255, 0.25);
+            --shadow-neon: 0 0 20px rgba(0, 212, 255, 0.5);
+            --glow: rgba(0, 212, 255, 0.3);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: linear-gradient(180deg, var(--darker) 0%, var(--dark) 100%);
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            position: relative;
+        }
+
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: 
+                radial-gradient(circle at 10% 10%, rgba(0, 102, 255, 0.1) 0%, transparent 30%),
+                radial-gradient(circle at 90% 20%, rgba(138, 43, 226, 0.08) 0%, transparent 30%),
+                radial-gradient(circle at 40% 80%, rgba(0, 212, 255, 0.05) 0%, transparent 30%);
+            z-index: -1;
+        }
+
+        .container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Profile Compact */
+        .profile-section {
+            background: rgba(16, 24, 64, 0.7);
+            backdrop-filter: blur(20px);
+            border-radius: 24px;
+            margin: 30px auto;
+            max-width: 1100px;
+            border: 1px solid rgba(0, 102, 255, 0.2);
+            box-shadow: var(--shadow), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+            overflow: hidden;
+            position: relative;
+        }
+
+        .profile-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            background: var(--gradient);
+        }
+
+        .profile-compact {
+            display: flex;
+            align-items: center;
+            padding: 25px 30px;
+            gap: 25px;
+        }
+
+        .profile-logo-compact {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            overflow: hidden;
+            border: 3px solid transparent;
+            background: var(--gradient) border-box;
+            position: relative;
+            flex-shrink: 0;
+            box-shadow: 0 0 20px rgba(0, 102, 255, 0.4);
+        }
+
+        .profile-logo-compact img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            padding: 3px;
+            border-radius: 50%;
+        }
+
+        .profile-info-compact {
+            flex: 1;
+        }
+
+        .profile-name-compact {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.2rem;
+            font-weight: 800;
+            margin-bottom: 8px;
+            background: linear-gradient(to right, var(--primary), var(--accent2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            letter-spacing: 0.5px;
+        }
+
+        .profile-crown {
+            color: #ffd700;
+            margin-left: 8px;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+        }
+
+        .profile-tagline-compact {
+            font-size: 1rem;
+            opacity: 0.9;
+            line-height: 1.5;
+            margin-bottom: 15px;
+            max-width: 800px;
+        }
+
+        .profile-features-compact {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 15px;
+        }
+
+        .feature-compact {
+            background: rgba(0, 102, 255, 0.1);
+            border-radius: 10px;
+            padding: 8px 14px;
+            font-size: 0.85rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid rgba(0, 102, 255, 0.2);
+        }
+
+        .feature-compact i {
+            color: var(--accent2);
+            font-size: 0.9rem;
+        }
+
+        /* Main Content */
+        .main-content {
+            padding: 40px 0;
+        }
+
+        .section-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 2.2rem;
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            padding-bottom: 10px;
+        }
+
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 2px;
+            box-shadow: var(--shadow);
+        }
+
+        /* Stocks Grid - Compact */
+        .stocks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 25px;
+            margin-bottom: 60px;
+        }
+
+        .stock-card-compact {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            border-radius: 18px;
+            overflow: hidden;
+            box-shadow: var(--shadow);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+
+        .stock-card-compact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient);
+        }
+
+        .stock-card-compact:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-neon), 0 15px 30px rgba(0, 0, 0, 0.3);
+            border-color: rgba(0, 212, 255, 0.3);
+        }
+
+        .stock-header-compact {
+            padding: 18px 20px 12px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.2);
+        }
+
+        .stock-number-compact {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.5rem;
+            font-weight: 700;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .stock-badge-compact {
+            background: var(--gradient);
+            color: white;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+            box-shadow: 0 4px 12px rgba(0, 102, 255, 0.3);
+            letter-spacing: 0.5px;
+        }
+
+        .stock-image-container-compact {
+            height: 180px;
+            overflow: hidden;
+            position: relative;
+            margin: 0 15px;
+            border-radius: 12px;
+            cursor: pointer;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .stock-image-compact {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .stock-image-container-compact:hover .stock-image-compact {
+            transform: scale(1.05);
+        }
+
+        .zoom-overlay-compact {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            border-radius: 12px;
+        }
+
+        .stock-image-container-compact:hover .zoom-overlay-compact {
+            opacity: 1;
+        }
+
+        .zoom-icon-compact {
+            width: 40px;
+            height: 40px;
+            background: var(--gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            box-shadow: 0 0 15px rgba(0, 212, 255, 0.5);
+        }
+
+        .stock-details-compact {
+            padding: 20px;
+        }
+
+        .stock-owner-compact {
+            font-size: 0.95rem;
+            margin-bottom: 18px;
+            background: rgba(0, 102, 255, 0.08);
+            padding: 10px 15px;
+            border-radius: 10px;
+            text-align: center;
+            border-left: 3px solid var(--accent2);
+        }
+
+        .stock-owner-compact .highlight {
+            color: var(--accent2);
+            font-weight: 700;
+        }
+
+        /* Compact Specs Grid */
+        .specs-grid-compact {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 18px;
+        }
+
+        .spec-item-compact {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 10px 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.2s ease;
+        }
+
+        .spec-item-compact:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(0, 212, 255, 0.2);
+            transform: translateY(-2px);
+        }
+
+        .spec-label-compact {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-bottom: 4px;
+            color: var(--accent2);
+            font-weight: 500;
+        }
+
+        .spec-value-compact {
+            font-size: 0.9rem;
+            font-weight: 600;
+            color: var(--light);
+        }
+
+        .stock-note-compact {
+            background: linear-gradient(135deg, rgba(255, 87, 87, 0.1), rgba(255, 193, 7, 0.1));
+            padding: 12px 15px;
+            border-radius: 10px;
+            font-size: 0.85rem;
+            text-align: center;
+            border-left: 3px solid #FF5722;
+        }
+
+        /* Contact Compact */
+        .contact-section-compact {
+            background: rgba(16, 24, 64, 0.7);
+            backdrop-filter: blur(20px);
+            border-radius: 20px;
+            padding: 35px 40px;
+            margin-bottom: 50px;
+            border: 1px solid rgba(0, 102, 255, 0.2);
+            box-shadow: var(--shadow);
+        }
+
+        .contact-title-compact {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            text-align: center;
+            background: linear-gradient(to right, var(--primary), var(--accent2));
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .contact-grid-compact {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 20px;
+            margin-bottom: 35px;
+        }
+
+        .contact-card-compact {
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 14px;
+            padding: 18px 20px;
+            display: flex;
+            align-items: center;
+            gap: 18px;
+            transition: all 0.3s ease;
+            border: 1px solid transparent;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .contact-card-compact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient);
+        }
+
+        .contact-card-compact:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: rgba(0, 212, 255, 0.3);
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-icon-compact {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: var(--gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            box-shadow: 0 5px 15px rgba(0, 102, 255, 0.3);
+            flex-shrink: 0;
+        }
+
+        .contact-info-compact h3 {
+            font-size: 1rem;
+            margin-bottom: 5px;
+            color: var(--light);
+        }
+
+        .contact-info-compact p {
+            opacity: 0.9;
+            font-size: 0.95rem;
+            color: var(--accent2);
+        }
+
+        .wa-button-container-compact {
+            text-align: center;
+            margin-top: 25px;
+        }
+
+        .wa-button-compact {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background: linear-gradient(135deg, #25D366, #128C7E);
+            color: white;
+            padding: 16px 35px;
+            border-radius: 14px;
+            font-size: 1.1rem;
+            font-weight: 700;
+            text-decoration: none;
+            box-shadow: 0 10px 25px rgba(37, 211, 102, 0.3);
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .wa-button-compact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: left 0.5s ease;
+        }
+
+        .wa-button-compact:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px rgba(37, 211, 102, 0.5);
+        }
+
+        .wa-button-compact:hover::before {
+            left: 100%;
+        }
+
+        .wa-button-compact i {
+            font-size: 1.3rem;
+        }
+
+        /* Footer Compact */
+        footer {
+            background: rgba(0, 0, 0, 0.2);
+            border-top: 1px solid rgba(0, 102, 255, 0.1);
+            padding: 30px 0;
+            text-align: center;
+            margin-top: 50px;
+        }
+
+        .footer-logo-compact {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 1.8rem;
+            font-weight: 800;
+            margin-bottom: 10px;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+
+        .footer-tagline-compact {
+            font-size: 0.9rem;
+            opacity: 0.8;
+            max-width: 500px;
+            margin: 0 auto 20px;
+            line-height: 1.5;
+        }
+
+        .copyright-compact {
+            opacity: 0.6;
+            font-size: 0.8rem;
+            margin-top: 15px;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .modal.active {
+            display: flex;
+            animation: modalFadeIn 0.2s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .modal-content-compact {
+            max-width: 85%;
+            max-height: 85%;
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: var(--shadow-neon), 0 20px 50px rgba(0, 0, 0, 0.5);
+            animation: modalZoom 0.2s ease;
+        }
+
+        @keyframes modalZoom {
+            from { transform: scale(0.9); }
+            to { transform: scale(1); }
+        }
+
+        .modal-img-compact {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+
+        .close-modal-compact {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: white;
+            z-index: 10;
+        }
+
+        .close-modal-compact:hover {
+            background: rgba(255, 50, 50, 0.8);
+            transform: rotate(90deg);
+        }
+
+        /* Responsive */
+        @media (max-width: 1100px) {
+            .stocks-grid {
+                grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .profile-compact {
+                flex-direction: column;
+                text-align: center;
+                padding: 20px;
+            }
+            
+            .profile-name-compact {
+                font-size: 1.8rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .stocks-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .contact-section-compact {
+                padding: 25px 20px;
+            }
+            
+            .contact-grid-compact {
+                grid-template-columns: 1fr;
+            }
+            
+            .profile-features-compact {
+                justify-content: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .profile-name-compact {
+                font-size: 1.6rem;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .contact-title-compact {
+                font-size: 1.5rem;
+            }
+            
+            .wa-button-compact {
+                padding: 14px 25px;
+                font-size: 1rem;
+            }
+            
+            .specs-grid-compact {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 0 15px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Profile Section -->
+    <section class="profile-section animate__animated animate__fadeIn">
+        <div class="profile-compact">
+            <div class="profile-logo-compact">
+                <img src="https://files.catbox.moe/7uyray.jpg" alt="DzXSTR01 Logo">
+            </div>
+            <div class="profile-info-compact">
+                <h1 class="profile-name-compact">DzXSTR01 <span class="profile-crown">👑</span></h1>
+                <p class="profile-tagline-compact">Toko akun Free Fire premium dengan garansi 100% aman. Semua akun original & ready stok.</p>
+                
+                <div class="profile-features-compact">
+                    <div class="feature-compact">
+                        <i class="fas fa-shield-alt"></i>
+                        <span>100% Aman</span>
+                    </div>
+                    <div class="feature-compact">
+                        <i class="fas fa-medal"></i>
+                        <span>Garansi Lengkap</span>
+                    </div>
+                    <div class="feature-compact">
+                        <i class="fas fa-bolt"></i>
+                        <span>Proses Instan</span>
+                    </div>
+                    <div class="feature-compact">
+                        <i class="fas fa-headset"></i>
+                        <span>Support 24/7</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <h2 class="section-title">ALL STOK DzXSTR01</h2>
+            
+            <div class="stocks-grid" id="stocksContainer">
+                <!-- Stok akan diisi oleh JavaScript -->
+            </div>
+
+            <!-- Contact Section -->
+            <div class="contact-section-compact">
+                <h2 class="contact-title-compact">Minat dengan Akunnya? Hubungi Kami</h2>
+                
+                <div class="contact-grid-compact">
+                    <div class="contact-card-compact">
+                        <div class="contact-icon-compact">
+                            <i class="fab fa-whatsapp"></i>
+                        </div>
+                        <div class="contact-info-compact">
+                            <h3>WhatsApp</h3>
+                            <p>081935928562</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card-compact">
+                        <div class="contact-icon-compact">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div class="contact-info-compact">
+                            <h3>Email</h3>
+                            <p>dzzxiterz99@gmail.com</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card-compact">
+                        <div class="contact-icon-compact">
+                            <i class="fab fa-tiktok"></i>
+                        </div>
+                        <div class="contact-info-compact">
+                            <h3>TikTok</h3>
+                            <p>@dzzxiterz1</p>
+                        </div>
+                    </div>
+                    
+                    <div class="contact-card-compact">
+                        <div class="contact-icon-compact">
+                            <i class="fab fa-telegram"></i>
+                        </div>
+                        <div class="contact-info-compact">
+                            <h3>Telegram</h3>
+                            <p>@DzXNewEra</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="wa-button-container-compact">
+                    <a href="https://wa.me/6281935928562?text=Halo%20DzXSTR01,%20saya%20minat%20dengan%20akun%20FF%20yang%20ada%20di%20website" class="wa-button-compact" target="_blank">
+                        <i class="fab fa-whatsapp"></i> WhatsApp Sekarang
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo-compact">DzXSTR01 👑</div>
+            <p class="footer-tagline-compact">Premium Free Fire Accounts Store - Akun Original & Bergaransi</p>
+            <p class="copyright-compact">© 2023 DzXSTR01 Store. All rights reserved.<br>Free Fire is a registered trademark of Garena International.</p>
+        </div>
+    </footer>
+
+    <!-- Modal untuk Zoom Gambar -->
+    <div class="modal" id="imageModal">
+        <div class="modal-content-compact">
+            <span class="close-modal-compact" id="closeModal">&times;</span>
+            <img class="modal-img-compact" id="modalImage" src="" alt="Zoomed Image">
+        </div>
+    </div>
+
+    <script>
+        // Data stok akun
+        const stocks = [
+            {
+                id: 1,
+                image: "https://files.catbox.moe/shsrmy.jpg",
+                title: "STOK 1",
+                spek: "ZOOM AJA",
+                log: "BINDKOS",
+                op: "100+",
+                note: "GANJAIN CARI STOK SUSAH🤝"
+            },
+            {
+                id: 2,
+                image: "https://files.catbox.moe/sleari.jpg",
+                title: "STOK 2",
+                spek: "ZOOM AJA",
+                log: "BIND SPKET",
+                op: "300+",
+                note: "GANJAIN CARI STOK SUSAH🤝"
+            },
+            {
+                id: 3,
+                image: "https://files.catbox.moe/534480.jpg",
+                title: "STOK 3",
+                spek: "ZOOM AJA",
+                log: "BIND SPKET",
+                op: "200+",
+                note: "GANJAIN CARI STOK SUSAH🤝"
+            },
+            {
+                id: 4,
+                image: "https://files.catbox.moe/paz7tc.jpg",
+                title: "STOK 4",
+                spek: "ZOOM AJA",
+                log: "BIND",
+                op: "160+",
+                note: "GANJAIN CARI STOK SUSAH🤝"
+            },
+            {
+                id: 5,
+                image: "https://files.catbox.moe/kgz1or.jpg",
+                title: "STOK 5",
+                spek: "ZOOM AJA",
+                log: "BIND SPKET",
+                op: "180+",
+                note: "GANJAIN CARI STOK SUSAH🤝"
+            },
+            {
+                id: 6,
+                image: "https://files.catbox.moe/xcuzf9.jpg",
+                title: "STOK 6",
+                spek: "ZOOM AJA",
+                log: "BIND SPKET",
+                op: "130+",
+                note: "GANJAIN CARI STOK SUSAH🤝"
+            },
+            {
+                id: 7,
+                image: "https://files.catbox.moe/l42g92.jpg",
+                title: "STOK 7",
+                spek: "ZOOM AJA",
+                log: "GOOGLE",
+                op: "100+",
+                note: "GANJAIN CARI STOK SUSAH🤝"
+            }
+        ];
+
+        // Render stok akun
+        const stocksContainer = document.getElementById('stocksContainer');
+        
+        stocks.forEach(stock => {
+            const stockCard = document.createElement('div');
+            stockCard.className = 'stock-card-compact animate__animated';
+            stockCard.style.animationDelay = `${stock.id * 0.08}s`;
+            
+            stockCard.innerHTML = `
+                <div class="stock-header-compact">
+                    <div class="stock-number-compact">${stock.title}</div>
+                    <div class="stock-badge-compact">PREMIUM</div>
+                </div>
+                
+                <div class="stock-image-container-compact" onclick="openModal('${stock.image}')">
+                    <img src="${stock.image}" alt="Stok ${stock.id}" class="stock-image-compact">
+                    <div class="zoom-overlay-compact">
+                        <div class="zoom-icon-compact">
+                            <i class="fas fa-search-plus"></i>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="stock-details-compact">
+                    <div class="stock-owner-compact">
+                        NEW STOK PRIBADI <span class="highlight">@DzXSTR01</span>
+                    </div>
+                    
+                    <div class="specs-grid-compact">
+                        <div class="spec-item-compact">
+                            <div class="spec-label-compact">SPEK</div>
+                            <div class="spec-value-compact">${stock.spek}</div>
+                        </div>
+                        <div class="spec-item-compact">
+                            <div class="spec-label-compact">LOG</div>
+                            <div class="spec-value-compact">${stock.log}</div>
+                        </div>
+                        <div class="spec-item-compact">
+                            <div class="spec-label-compact">OP</div>
+                            <div class="spec-value-compact">${stock.op}</div>
+                        </div>
+                        <div class="spec-item-compact">
+                            <div class="spec-label-compact">STATUS</div>
+                            <div class="spec-value-compact">READY</div>
+                        </div>
+                    </div>
+                    
+                    <div class="stock-note-compact">
+                        ${stock.note}
+                    </div>
+                </div>
+            `;
+            
+            stocksContainer.appendChild(stockCard);
+        });
+
+        // Modal functionality
+        const modal = document.getElementById('imageModal');
+        const modalImage = document.getElementById('modalImage');
+        const closeModalBtn = document.getElementById('closeModal');
+
+        function openModal(imageSrc) {
+            modalImage.src = imageSrc;
+            modal.classList.add('active');
+            document.body.style.overflow = 'hidden';
+        }
+
+        function closeModalFunc() {
+            modal.classList.remove('active');
+            document.body.style.overflow = 'auto';
+        }
+
+        closeModalBtn.addEventListener('click', closeModalFunc);
+        
+        modal.addEventListener('click', function(event) {
+            if (event.target === modal) {
+                closeModalFunc();
+            }
+        });
+
+        // Close modal dengan tombol ESC
+        document.addEventListener('keydown', function(event) {
+            if (event.key === 'Escape' && modal.classList.contains('active')) {
+                closeModalFunc();
+            }
+        });
+
+        // Animasi scroll
+        window.addEventListener('scroll', function() {
+            const cards = document.querySelectorAll('.stock-card-compact, .contact-card-compact');
+            
+            cards.forEach(card => {
+                const cardTop = card.getBoundingClientRect().top;
+                const windowHeight = window.innerHeight;
+                
+                if (cardTop < windowHeight * 0.85) {
+                    card.classList.add('animate__fadeInUp');
+                    card.style.opacity = '1';
+                    card.style.transform = 'translateY(0)';
+                }
+            });
+        });
+
+        // Inisialisasi animasi
+        document.addEventListener('DOMContentLoaded', function() {
+            const cards = document.querySelectorAll('.stock-card-compact');
+            cards.forEach(card => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(20px)';
+                card.style.transition = 'opacity 0.4s ease, transform 0.4s ease';
+            });
+            
+            // Trigger scroll event setelah halaman dimuat
+            setTimeout(() => {
+                window.dispatchEvent(new Event('scroll'));
+            }, 300);
+        });
+    </script>
+</body>
+</html>
